@@ -44,6 +44,10 @@ $tick-color:        rgba(0, 0, 0, 0.4);
     font-weight: 600;
     font-size: 20px;
     margin-top: 0;
+
+    .separator {
+      padding-left: 20px;
+    }
   }
 
   .updated-at {

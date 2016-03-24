@@ -1,12 +1,21 @@
+<link rel="stylesheet" href="fontello-ed5bf279/css/fontello.css"><!--[if IE 7]><link rel="stylesheet" href="fontello-ed5bf279/css/fontello-ie7.css"><![endif]-->
+
 <h1 class="title" data-bind="title"></h1>
 
 <h2 class="value">
-  <span class="fa-stack fa-lg">
-    <i class="fa fa-circle fa-stack-1x"></i>
-    <i data-bind-class="classes | prepend 'fa fa-stack-1x fa-inverse fa-'"></i>
-  </span>
+  <i data-bind-class="smileyClass | prepend 'fontello-emo-'"></i>
 </h2>
 
-<p class="more-info"><span data-bind="dailyMood"></span></p>
+<p class="more-info">
+  <i class="fontello-emo-cry"></i><span data-bind="moods.cry"></span>
+  <span class="separator"></span>
+  <i class="fontello-emo-unhappy"></i><span data-bind="moods.unhappy"></span>
+  <span class="separator"></span>
+  <i class="fontello-emo-sleep"></i><span data-bind="moods.sleep"></span>
+  <span class="separator"></span>
+  <i class="fontello-emo-happy"></i><span data-bind="moods.happy"></span>
+  <span class="separator"></span>
+  <i class="fontello-emo-laugh"></i><span data-bind="moods.laugh"></span>
+</p>
 
-<p class="updated-at">curl -d '{ "auth_token": "YOUR_AUTH_TOKEN", "mood": "[0..4]" }' <span data-bind="url"></span></p>
+<p class="updated-at">curl -d '{ "auth_token": "YOUR_AUTH_TOKEN", "mood": 0|1|2|3|4 }' <span data-bind="url"></span></p>
