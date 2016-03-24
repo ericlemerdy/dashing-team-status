@@ -1,7 +1,12 @@
 <h1 class="title" data-bind="title"></h1>
 
 <h2 class="value">
-    <i data-bind-class="current"></i>
+  <span class="fa-stack fa-lg">
+    <i class="fa fa-circle fa-stack-1x"></i>
+    <i data-bind-class="classes | prepend 'fa fa-stack-1x fa-inverse fa-'"></i>
+  </span>
 </h2>
 
-<p class="more-info" data-bind="moreinfo"></p>
+<p class="more-info"><span data-bind="dailyMood"></span></p>
+
+<p class="updated-at">curl -d '{ "auth_token": "YOUR_AUTH_TOKEN", "mood": "[0..4]" }' <span data-bind="url"></span></p>

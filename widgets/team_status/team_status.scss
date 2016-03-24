@@ -46,6 +46,14 @@ $tick-color:        rgba(0, 0, 0, 0.4);
     margin-top: 0;
   }
 
+  .updated-at {
+    color: $title-color;
+    bottom: 5px;
+    right: 5px;
+    left: auto;
+    font-size: 0.5em;
+  }
+
   .x_tick {
     position: absolute;
     bottom: 0;
