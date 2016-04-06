@@ -16,12 +16,6 @@ $tick-color:        rgba(0, 0, 0, 0.4);
   background-color: $background-color;
   position: relative;
 
-  .excellent-day { color: #1abc9c; }
-  .good-day      { color: #5c91df; }
-  .neutral-day   { color: #f1c40f; }
-  .hard-day      { color: #ff7a23; }
-  .bad-day       { color: #8c3b5b; }
-
   svg {
     position: absolute;
     opacity: 0.4;
@@ -80,3 +74,9 @@ $tick-color:        rgba(0, 0, 0, 0.4);
   }
 
 }
+
+.laugh   { background-color: #5D8C7A; }
+.happy   { background-color: #245359; }
+.sleep   { background-color: #FF9D83; }
+.unhappy { background-color: #9D3238; }
+.cry     { background-color: #661C00; }

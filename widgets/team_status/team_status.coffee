@@ -100,3 +100,6 @@ if Dashing?
         'happy': teamStatusLib.moods[3],
         'laugh': teamStatusLib.moods[4]
       }
+      lastClass = @get "lastClass"
+      $(@node).toggleClass "#{lastClass} #{teamStatusLib.smileyClass}"
+      @set "lastClass", teamStatusLib.smileyClass
