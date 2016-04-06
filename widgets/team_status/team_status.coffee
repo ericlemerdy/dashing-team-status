@@ -5,14 +5,21 @@ class TeamStatusLib
     @data = []
     @moods = [0, 0, 0, 0, 0]
     @votesOfTheDay = 0
-    @lastDay = @getDate().getDay()
+    @yesterday = @getDate()
     @dailyMood = 0
+    @datas = ({ 'x': @getDatePlus(-day).getTime() / 1000, 'y': 0 } for day in [13..0])
+
+  getDatas: ->
+    @datas
 
   createDate: ->
     new Date()
 
+  getDatePlus: (days) ->
+    new Date(@createDate().getTime() + days * 1000*60*60*24)
+
   getDate: ->
-    new Date(@createDate().getTime() + @supplementaryDays * 1000*60*60*24)
+    @getDatePlus @supplementaryDays
 
   url: ->
     window.location.protocol + '//' + window.location.host + '/widgets/team-status-data-id'
@@ -30,14 +37,14 @@ class TeamStatusLib
 
   onMood: (data) ->
     @moods[data.mood] = @moods[data.mood] + 1
-    todayDay = @getDate().getDay()
-    newDay = (@lastDay != todayDay)
+    today = @getDate()
+    newDay = (@yesterday.getDay() != today.getDay())
     if (newDay)
-      @data.push @dailyMood
+      @data.push { 'x': @yesterday.getTime() / 1000, 'y': @dailyMood }
       @moods = [0, 0, 0, 0, 0]
       @dailyMood = 0
       @votesOfTheDay = 0
-      @lastDay = todayDay
+      @yesterday = today
     @dailyMood = ((@votesOfTheDay * @dailyMood) + data.mood) / (@votesOfTheDay + 1)
     @smileyClass = @getSmileyClassOf @dailyMood
     @votesOfTheDay = @votesOfTheDay + 1
@@ -68,25 +75,22 @@ if Dashing?
         element: @node
         width: width
         height: height
-        renderer: @get 'graphtype'
         series: [
           {
             color: '#fff',
-            data: [
-              {x:0, y:0}, {x:1, y:0}, {x:2, y:0}, {x:3, y:0}, {x:4, y:0},
-              {x:5, y:0}, {x:6, y:0}, {x:7, y:0}, {x:8, y:0}, {x:9, y:0},
-              {x:10, y:0}, {x:11, y:0}, {x:12, y:0}, {x:13, y:0}
-            ]
+            data: teamStatusLib.getDatas()
           }
         ]
       )
       @graph.series[0].data = @get('points') if @get('points')
+      x_axis = new Rickshaw.Graph.Axis.Time({ graph: @graph })
       @graph.render()
 
     onData: (data) ->
       if (@graph && teamStatusLib.onData data)
-        last_x = @graph.series[0].data.shift().x + @graph.series[0].data.length + 1
-        @graph.series[0].data.push { x: last_x + 1, y: teamStatusLib.data[teamStatusLib.data.length - 1] }
+        @graph.series[0].data.shift()
+        point = teamStatusLib.data[teamStatusLib.data.length - 1]
+        @graph.series[0].data.push { x: point.x, y: point.y }
         @graph.render()
       @set 'smileyClass', teamStatusLib.smileyClass
       @set 'moods', {

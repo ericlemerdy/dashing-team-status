@@ -22,14 +22,32 @@ if describe?
       it 'should have zero supplementary day', ->
         expect(teamStatusLib.supplementaryDays).toBe 0
   
-      it 'should have the current last day', ->
-        expect(teamStatusLib.lastDay).toBe 4
+      it 'should have the current previous day', ->
+        expect(teamStatusLib.yesterday).toEqual new Date 1981, 11, 24, 10, 0, 0
   
       it 'should have no data', ->
         expect(teamStatusLib.data.length).toBe 0
   
       it 'should have no mood', ->
         expect(teamStatusLib.dailyMood).toBe 0
+
+      it 'should have 14 days of empty data', ->
+        expect(teamStatusLib.datas).toEqual [
+          { 'x': new Date(1981, 11, 11, 10, 0, 0).getTime() / 1000, 'y': 0 },
+          { 'x': new Date(1981, 11, 12, 10, 0, 0).getTime() / 1000, 'y': 0 },
+          { 'x': new Date(1981, 11, 13, 10, 0, 0).getTime() / 1000, 'y': 0 },
+          { 'x': new Date(1981, 11, 14, 10, 0, 0).getTime() / 1000, 'y': 0 },
+          { 'x': new Date(1981, 11, 15, 10, 0, 0).getTime() / 1000, 'y': 0 },
+          { 'x': new Date(1981, 11, 16, 10, 0, 0).getTime() / 1000, 'y': 0 },
+          { 'x': new Date(1981, 11, 17, 10, 0, 0).getTime() / 1000, 'y': 0 },
+          { 'x': new Date(1981, 11, 18, 10, 0, 0).getTime() / 1000, 'y': 0 },
+          { 'x': new Date(1981, 11, 19, 10, 0, 0).getTime() / 1000, 'y': 0 },
+          { 'x': new Date(1981, 11, 20, 10, 0, 0).getTime() / 1000, 'y': 0 },
+          { 'x': new Date(1981, 11, 21, 10, 0, 0).getTime() / 1000, 'y': 0 },
+          { 'x': new Date(1981, 11, 22, 10, 0, 0).getTime() / 1000, 'y': 0 },
+          { 'x': new Date(1981, 11, 23, 10, 0, 0).getTime() / 1000, 'y': 0 },
+          { 'x': new Date(1981, 11, 24, 10, 0, 0).getTime() / 1000, 'y': 0 }
+        ]
   
     describe 'passing days', ->
       it 'should advance days', ->
@@ -71,5 +89,5 @@ if describe?
   
       expect(teamStatusLib.votesOfTheDay).toBe 1
       expect(teamStatusLib.dailyMood).toBe 2
-      expect(teamStatusLib.data).toContain 4
+      expect(teamStatusLib.data).toContain { 'x': new Date(1981, 11, 24, 10, 0, 0) / 1000, 'y': 4 }
   
