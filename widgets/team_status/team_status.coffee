@@ -7,7 +7,11 @@ class TeamStatusLib
     @votesOfTheDay = 0
     @yesterday = @getDate()
     @dailyMood = 0
-    @datas = ({ 'x': @getDatePlus(-day).getTime() / 1000, 'y': 0 } for day in [13..0])
+    @datas = (@makePoint @getDatePlus(-day), 0 for day in [13..0])
+    @myDataRef = new Firebase 'https://radiant-torch-4948.firebaseio.com/'
+
+  makePoint: (date, value) ->
+    { 'x' : Math.ceil(date.getTime() / 1000), 'y': value }
 
   getDatas: ->
     @datas
@@ -40,7 +44,8 @@ class TeamStatusLib
     today = @getDate()
     newDay = (@yesterday.getDay() != today.getDay())
     if (newDay)
-      @data.push { 'x': @yesterday.getTime() / 1000, 'y': @dailyMood }
+      @myDataRef.push(@makePoint @yesterday, @dailyMood)
+      @data.push(@makePoint @yesterday, @dailyMood)
       @moods = [0, 0, 0, 0, 0]
       @dailyMood = 0
       @votesOfTheDay = 0
