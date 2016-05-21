@@ -1,0 +1,25 @@
+{
+  "name": "team_status",
+  "version": "1.0.0",
+  "description": "",
+  "main": "team_status.coffee",
+  "scripts": {
+    "test": "jasmine-node --coffee widgets/team_status"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ericlemerdy/dashing-team-status.git"
+  },
+  "keywords": [
+    "dashing"
+  ],
+  "author": "Éric Le Merdy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ericlemerdy/dashing-team-status/issues"
+  },
+  "homepage": "https://github.com/ericlemerdy/dashing-team-status#readme",
+  "dependencies": {
+    "jasmine-node": "^1.14.5"
+  }
+}

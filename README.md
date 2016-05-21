@@ -3,7 +3,7 @@ Awesome team status widget for Dashing
 
 This dashing widget allows you to display the mood of your team.
 
-## Test the plugin
+## Run the plugin
 
 ### 1. Create an empty dashboard in `sample`
 
@@ -41,4 +41,22 @@ To have data, you can execute this script several time in oder to have some vote
 
 ```shell
 ./data.sh
+```
+
+## Unit tests
+
+```shell
+docker run -it \
+  -e "HOME=/data" \
+  -v $(pwd):/data \
+  --user 1000:1000 \
+  --rm \
+  digitallyseamless/nodejs-bower-grunt
+```
+
+Once in the container :
+
+```shell
+npm install
+npm test
 ```
